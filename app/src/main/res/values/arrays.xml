@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_pulsa">
+        <item>5k</item>
+        <item>10k</item>
+        <item>25k</item>
+        <item>50k</item>
+        <item>100k</item>
+    </string-array>
+
+    <string-array name="list_bank">
+        <item>BCA</item>
+        <item>BRI</item>
+        <item>Mandiri</item>
+        <item>BNI</item>
+    </string-array>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/dashboard"
+            android:checked="true"
+            android:icon="@drawable/ic_coin"
+            android:title="@string/dashboard_string" />
+
+        <item
+            android:id="@+id/topup"
+            android:checked="false"
+            android:icon="@drawable/ic_inbox_black"
+            android:title="@string/topup_string" />
+
+        <item
+            android:id="@+id/howto"
+            android:checked="false"
+            android:icon="@drawable/ic_help"
+            android:title="@string/howto_string" />
+
+        <item
+            android:checkable="false"/>
+
+        <item
+            android:id="@+id/logout"
+            android:checked="false"
+            android:icon="@drawable/ic_error_black"
+            android:title="@string/logout_string"/>
+
+    </group>
+
+</menu>
