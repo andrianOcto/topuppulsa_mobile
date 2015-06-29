@@ -20,7 +20,7 @@
             android:textColorHint="#FFEBEE"
             android:textColor="#FFEBEE"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="130dp"
             android:inputType="textCapCharacters"/>
 
         <EditText

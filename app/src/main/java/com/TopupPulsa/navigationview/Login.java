@@ -12,15 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLDecoder;
 
 import RequestServer.RequestMaster;
 import Setting.AppConfig;
-import Setting.Server;
-import Setting.User;
 
 public class Login extends AppCompatActivity {
     EditText Email;
@@ -39,6 +36,7 @@ public class Login extends AppCompatActivity {
                 Intent it = new Intent(Login.this, Register.class);
                 startActivity(it);
 
+                overridePendingTransition(R.animator.anim, R.animator.anim2);
             }
         });
 
