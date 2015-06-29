@@ -129,6 +129,7 @@ public class JSONParser {
                     counter++;
                 }
                 URL url = new URL(server+param);
+
                 String message = new JSONObject().toString();
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

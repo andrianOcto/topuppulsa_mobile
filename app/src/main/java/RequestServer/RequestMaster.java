@@ -5,31 +5,27 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import Setting.Server;
 
 /**
  * Created by octo on 6/27/2015.
  */
-public class RequestTask extends AsyncTask<String, String, String> {
+public class RequestMaster extends AsyncTask<String, String, String> {
     private ProgressDialog pDialog;
     private Context context;
     JSONParser request=new JSONParser();
     public JSONObject json;
-    Server server = new Server();
     public ContentValues params;
     String urlService;
     String loading;
     String methodReq;
+    public boolean stat=false;
 
-    public RequestTask(Context context,String url,String loadingMsg,String method,ContentValues parameter)
+    public RequestMaster(Context context, String url, String loadingMsg, String method, ContentValues parameter)
     {
-        super();
+        //super();
         this.context = context;
         loading=loadingMsg;
         urlService=url;
@@ -41,7 +37,7 @@ public class RequestTask extends AsyncTask<String, String, String> {
     protected String doInBackground(String... arg0) {
 
         // getting JSON string from URL
-        json = request.makeHttpRequest(server.getPath()+urlService, methodReq, params);
+        json = request.makeHttpRequest(Server.path + urlService, methodReq, params);
 
         return null;
     }
@@ -61,12 +57,7 @@ public class RequestTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         // TODO Auto-generated method stub
         pDialog.dismiss();
-
         super.onPostExecute(result);
-
-        synchronized (this) {
-            this.notify();
-        }
     }
 
     @Override
@@ -74,4 +65,11 @@ public class RequestTask extends AsyncTask<String, String, String> {
         super.onCancelled(s);
         pDialog.dismiss();
     }
+
+    public void dismissDialog()
+    {
+        pDialog.dismiss();
+    }
+
+
 }

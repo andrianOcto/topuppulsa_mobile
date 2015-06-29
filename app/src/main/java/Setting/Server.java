@@ -2,10 +2,11 @@ package Setting;
 
 /**
  * Created by octo on 6/27/2015.
+ * kelas digunakan untuk mendefinisikan server yang digunakan aplikasi
  */
 public class Server {
-    private String path="http://pakarburung.hol.es";
-    public String getPath() {
-        return path;
-    }
+    public static String path   ="http://topup-npmedia.rhcloud.com";
+
+
+
 }
