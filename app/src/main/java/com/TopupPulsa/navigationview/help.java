@@ -1,7 +1,5 @@
 package com.TopupPulsa.navigationview;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,8 +23,4 @@ public class help extends AppCompatActivity {
         return true;
     }
 
-    public static void Launch(Context c){
-        Intent help = new Intent(c, help.class);
-        c.startActivity(help);
-    }
 }

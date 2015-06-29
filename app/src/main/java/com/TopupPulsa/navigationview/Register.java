@@ -29,7 +29,7 @@ public class Register extends AppCompatActivity {
         Button regButton    = (Button) findViewById(R.id.button_register_submit);
 
         //listener back to Login
-        TextView backLogin = (TextView)findViewById(R.id.text_backtoLogin);
+        TextView backLogin = (TextView)findViewById(R.id.button_backtoLogin);
         backLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
