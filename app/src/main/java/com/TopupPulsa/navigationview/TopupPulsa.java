@@ -1,5 +1,6 @@
 package com.TopupPulsa.navigationview;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import RequestServer.RequestMaster;
 import Setting.AppConfig;
 
 /**
@@ -20,6 +22,7 @@ public class TopupPulsa extends Fragment {
     SharedPreferences sharedpreferences;
     TextView nameAccount;
     TextView saldoAccount;
+
 
     @Nullable
     @Override
@@ -36,5 +39,20 @@ public class TopupPulsa extends Fragment {
         saldoAccount.setText(String.valueOf(sharedpreferences.getInt(AppConfig.userSaldo,0)));
         
         return v;
+    }
+    private class RequestTask extends RequestMaster{
+
+        public RequestTask(Context context, String url, String loadingMsg, String method, ContentValues parameter) {
+            super(context, url, loadingMsg, method, parameter);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //digunakan untuk mendefinisikan proses setelah proses dengan menggunakan variable json
+            //dokumentasi lebih lanjut dapat dilihat pada kelas RequestMaster
+            super.onPostExecute(result);
+
+
+        }
     }
 }

@@ -37,6 +37,7 @@ public class Register extends AppCompatActivity {
                 startActivity(i);
 
                 overridePendingTransition(R.animator.anim1a, R.animator.anim2a);
+                finish();
             }
         });
 

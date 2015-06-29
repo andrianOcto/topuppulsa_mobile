@@ -92,7 +92,7 @@ public class Login extends AppCompatActivity {
                     //Show message
                     Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    JSONObject test= json.getJSONObject("result");
+                    System.out.println(json.get("result").toString());
 
                     //Save account to temporary
                     SharedPreferences.Editor editor = sharedpreferences.edit();
