@@ -18,7 +18,7 @@
         android:text="Register Here   >"
         android:textColor="#ffff"
         android:id="@+id/button_register"
-            android:backgroundTint="@color/PrimaryColor"
+            android:background="@drawable/button_red"
             android:paddingLeft="20sp"
             android:paddingRight="20sp"
             android:elevation="@dimen/abc_action_bar_content_inset_material"
@@ -46,7 +46,7 @@
             android:text="Login with Facebook"
             android:layout_centerHorizontal="true"
             android:textColor="#ffffff"
-            android:backgroundTint="@color/DarkBlue"
+            android:background="@drawable/button_facebook"
             android:elevation="@dimen/abc_action_bar_content_inset_material"
             android:paddingRight="20sp"
             android:paddingLeft="20sp"/>
@@ -57,6 +57,7 @@
             android:id="@+id/text_or"
             android:layout_below="@id/button_login_facebook"
             android:text="or"
+            android:layout_marginTop="5sp"
             android:layout_centerHorizontal="true"
             android:textColor="#ffff"/>
 

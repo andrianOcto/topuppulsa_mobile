@@ -68,8 +68,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="#ffff"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/BlueSky"
-
+            android:background="@drawable/button_bluesky"
             android:elevation="@dimen/abc_action_bar_content_inset_material"
             android:paddingRight="30sp"
             android:paddingLeft="30sp"/>
@@ -78,8 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button_backtoLogin"
-
-            android:backgroundTint="@color/PrimaryColor"
+            android:background="@drawable/button_red"
             android:text="Login"
             android:textColor="#ffff"
             android:paddingLeft="20sp"
