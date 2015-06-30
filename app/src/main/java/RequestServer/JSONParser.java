@@ -4,6 +4,7 @@ package RequestServer;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,6 +34,8 @@ import android.content.ContentValues;
 import android.net.Uri;
 import android.util.Log;
 
+import Setting.Server;
+
 /**
  * Created by octo on 6/27/2015.
  */
@@ -60,49 +63,56 @@ public class JSONParser {
 
             // check for request method POST
             if(method.equals("POST")){
-                //constants
-                System.out.println("POST REQUEST");
-                URL url = new URL(server);
-                String message = new JSONObject().toString();
+                URL url;
+                HttpURLConnection connection = null;
+                try {
+                    //Create connection
+                    url = new URL(Server.path+"/api/topup");
+                    connection = (HttpURLConnection)url.openConnection();
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type",
+                            "application/x-www-form-urlencoded");
 
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(10000 /*milliseconds*/);
-                conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
+                    connection.setRequestProperty("Content-Length", "" +
+                            Integer.toString("idmember=27&nominal=1000&rekening=89898&bank=bca&message=alsdjalsdj".getBytes().length));
+                    connection.setRequestProperty("Content-Language", "en-US");
 
-                //make some HTTP header nicety
-                conn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-                conn.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+                    connection.setUseCaches(false);
+                    connection.setDoInput(true);
+                    connection.setDoOutput(false);
+                    connection.setRequestProperty("User-Agent","Mozilla/5.0 ( compatible ) ");
+                    connection.setRequestProperty("Accept","*/*");
 
-                Uri.Builder builder = new Uri.Builder();
+                    //Send request
+                    DataOutputStream wr = new DataOutputStream (
+                            connection.getOutputStream ());
+                    wr.writeBytes ("idmember=27&nominal=1000&rekening=89898&bank=bca&message=alsdjalsdj");
+                    wr.flush();
+                    wr.close ();
 
-                Set<Map.Entry<String, Object>> s=params.valueSet();
-                Iterator itr = s.iterator();
+                    //Get Response
+                    InputStream is = connection.getInputStream();
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+                    String line;
+                    StringBuffer response = new StringBuffer();
+                    while((line = rd.readLine()) != null) {
+                        response.append(line);
+                        response.append('\r');
+                    }
+                    rd.close();
+                    json=response.toString();
 
-                while(itr.hasNext())
-                {
-                    Map.Entry me = (Map.Entry)itr.next();
-                    String key = me.getKey().toString();
-                    Object value =  me.getValue();
+                } catch (Exception e) {
 
-                    builder.appendQueryParameter(key,value.toString());
+                    e.printStackTrace();
+                    return null;
+
+                } finally {
+
+                    if(connection != null) {
+                        connection.disconnect();
+                    }
                 }
-
-                String query = builder.build().getEncodedQuery();
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(query);
-                writer.flush();
-
-                //open
-                conn.connect();
-
-                //do somehting with response
-                is = conn.getInputStream();
 
             }else if(method.equals("GET")){
                 // request method is GET
@@ -130,8 +140,6 @@ public class JSONParser {
                 }
                 URL url = new URL(server+param);
 
-                String message = new JSONObject().toString();
-
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10000 /*milliseconds*/);
                 conn.setConnectTimeout(15000 /* milliseconds */);
@@ -150,16 +158,20 @@ public class JSONParser {
             e.printStackTrace();
         }
 
+
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+            if(method.equals("GET")) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        is, "iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                is.close();
+                json = sb.toString();
             }
-            is.close();
-            json = sb.toString();
+
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
