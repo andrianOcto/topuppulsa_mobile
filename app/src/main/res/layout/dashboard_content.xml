@@ -144,7 +144,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:backgroundTint="#E0E0E0"
-            android:elevation="@dimen/abc_action_bar_content_inset_material"/>
+            android:elevation="@dimen/abc_action_bar_content_inset_material"
+            android:paddingRight="20sp"
+            android:paddingLeft="20sp"/>
 
     </RelativeLayout>
 
