@@ -66,15 +66,36 @@ public class JSONParser {
                 URL url;
                 HttpURLConnection connection = null;
                 try {
+                    Set<Map.Entry<String, Object>> s=params.valueSet();
+                    Iterator itr = s.iterator();
+                    int counter = 0;
+
+                    while(itr.hasNext())
+                    {
+                        //digunakan untuk ? dan & penghubung parameter
+                        if(counter == 0)
+                            param += "";
+                        else
+                            param += "&";
+
+                        Map.Entry me = (Map.Entry)itr.next();
+                        String key = me.getKey().toString();
+                        Object value =  me.getValue();
+
+                        param+= key + "=" + value;
+                        counter++;
+                    }
+
                     //Create connection
-                    url = new URL(Server.path+"/api/topup");
+                    url = new URL(server);
+                    System.out.println(server);
                     connection = (HttpURLConnection)url.openConnection();
                     connection.setRequestMethod("POST");
                     connection.setRequestProperty("Content-Type",
                             "application/x-www-form-urlencoded");
 
                     connection.setRequestProperty("Content-Length", "" +
-                            Integer.toString("idmember=27&nominal=1000&rekening=89898&bank=bca&message=alsdjalsdj".getBytes().length));
+                            Integer.toString(param.getBytes().length));
                     connection.setRequestProperty("Content-Language", "en-US");
 
                     connection.setUseCaches(false);
@@ -86,7 +107,7 @@ public class JSONParser {
                     //Send request
                     DataOutputStream wr = new DataOutputStream (
                             connection.getOutputStream ());
-                    wr.writeBytes ("idmember=27&nominal=1000&rekening=89898&bank=bca&message=alsdjalsdj");
+                    wr.writeBytes (param);
                     wr.flush();
                     wr.close ();
 
