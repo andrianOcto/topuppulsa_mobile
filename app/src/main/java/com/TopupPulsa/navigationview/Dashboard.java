@@ -117,7 +117,7 @@ public class Dashboard extends Fragment {
             this.dismissDialog();
 
             try {
-                if (json.get("status_code").toString().equals("200") && json.get("message").toString().equals("Success Buy")) {
+                if (json.get("status_code").toString().equals("200") && json.get("message").toString().equals("Success Buy Pulsa")) {
                     //Show message
                     Toast.makeText(getActivity(), json.get("message").toString(), Toast.LENGTH_SHORT).show();
 
@@ -131,7 +131,7 @@ public class Dashboard extends Fragment {
                 else
                 {
                     //Show message
-                    Toast.makeText(getActivity(), json.get("message").toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Wrong", Toast.LENGTH_SHORT).show();
                 }
 
             }
